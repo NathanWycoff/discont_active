@@ -1,3 +1,5 @@
 *.RData
 *.pdf
 flee/*
+R/flee_to_csv.R
+R/theory_confirm.R

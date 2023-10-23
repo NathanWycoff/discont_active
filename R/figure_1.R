@@ -19,7 +19,6 @@ yp <- sapply(1:nrow(neigh), function(i) {
     w*y[neigh[i,2]] + (1-w) * y[neigh[i,1]]
 })
 
-#pdf("images/1d_interp.pdf", width = 5, height = 3)
 pdf("images/1d_interp.pdf", width = 5, height = 2.5)
 par(mar=c(2,2,0,0)+0.1)
 par(mgp=c(0,0.5,0))
@@ -45,7 +44,6 @@ for (N in Ns) {
     c_hats <- c(c_hats, c_hat)
 }
 
-#pdf("images/1d_div.pdf", width = 5, height = 3)
 pdf("images/1d_div.pdf", width = 5, height = 2.5)
 par(mar=c(2.5,2.5,0,0)+0.1)
 par(mgp=c(1.5,0.5,0))

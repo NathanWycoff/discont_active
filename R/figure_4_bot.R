@@ -3,14 +3,9 @@ library(xtable)
 load('flee/C.RData')
 source("flee/flee_common.R")
 
-#library(rjson)
-#bounds <- fromJSON(file='param_ranges.json')
-#lb <- sapply(bounds, function(x) x$min)
-#varnames <- names(lb)
 varnames <- c("max_move_speed" , "max_walk_speed" , "camp_move_chance" , "conflict_move_chance" , "default_move_chance" , "camp_weight", "conflict_weight")
 
 eds <- C
-#eds <- Cs
 
 ## Make biggest loading positive.
 for (dat in dats) {
@@ -34,8 +29,6 @@ colnames(eigv3) <- sapply(colnames(eigv3), function(n) pretty_names[[n]])
 xtable(eigv1)
 xtable(eigv2)
 
-#pdf("images/flee_evals.pdf", width = 7, height = 5)
-#par(mfrow=c(2,3))
 pdf("images/flee_evals.pdf", width = 10, height = 2)
 par(mfrow=c(1,6))
 par(mar=c(2.2,1.3,1,1))

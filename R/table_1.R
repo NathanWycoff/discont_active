@@ -1,7 +1,7 @@
 library(rjson)
 library(xtable)
 
-bounds <- fromJSON(file='flee/param_ranges.json')
+bounds <- fromJSON(file='param_ranges.json')
 
 names(bounds)
 sappbounds[['max_move_speed']]

@@ -6,20 +6,14 @@ source("flee/flee_common.R")
 plot_asm <- function(X, y, ed, main = '', xlab = '', ylab = '', fname = 'asm.pdf', useranks = TRUE) {
     Z <- X %*% ed$vectors[,1:2]
 
-    #fitZ <- mleHomGP(Z, y)
     fitZ <- mleHomTP(Z, y)
     smooth_y <- predict(fitZ, Z)$mean
 
     fld <- interp(x = Z[,1], y = Z[,2], z = smooth_y)
 
-    #pal = colorRampPalette(c("red", "blue"))
-    #pal = colorRampPalette(c("red", "cadetblue1"))
     pal = colorRampPalette(c("cadetblue1","red"))
-    #palpoint = colorRampPalette(c("orangered", "cyan"))
     palpoint <- pal
     KK <- 10
-    #cols <- pal(KK)[as.numeric(cut(y,breaks = KK))]
-    #cols <- pal(KK)[as.numeric(cut(rank(y),breaks = KK))]
     if (useranks) {
         ycol <- rank(y)
     } else {
@@ -29,12 +23,7 @@ plot_asm <- function(X, y, ed, main = '', xlab = '', ylab = '', fname = 'asm.pdf
     cols <- palpoint(KK)[as.numeric(cut(ycol,breaks = KK))]
 
     # Plot results
-    #pdf("cholera_unif_asm.pdf", width = 5, height = 5)
     pdf(fname)
-    #par(mar=c(5,4,4,2)+0.1) #BLTR
-    #par(mgp=c(3,1,0))
-    #par(mar=c(2.8,2.7,2,1)+0.1) #BLTR
-    #par(mar=c(1.7,1.7,2,1)+0.1) #BLTR
     par(mar=c(1.7,2.1,2,2)+0.1) #BLTR
     par(mgp=c(0.4,0.5,0))
     filled.contour(x = fld$x,
