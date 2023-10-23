@@ -1,7 +1,7 @@
 library(xtable)
 
-load('flee/C.RData')
-source("flee/flee_common.R")
+load('./data/C.RData')
+source("R/flee_common.R")
 
 varnames <- c("max_move_speed" , "max_walk_speed" , "camp_move_chance" , "conflict_move_chance" , "default_move_chance" , "camp_weight", "conflict_weight")
 

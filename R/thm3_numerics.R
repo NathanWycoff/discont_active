@@ -47,7 +47,7 @@ for (n1 in 1:ng) {
     }   
 }   
 
-pdf("thm3_heatmap.pdf", height = 6, width = 10)
+pdf("./images/thm3_heatmap.pdf", height = 6, width = 10)
 par(mfrow=c(1,2))
 image(Y)
 image(Yhat)

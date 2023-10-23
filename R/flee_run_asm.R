@@ -8,8 +8,14 @@ Cs <- list()
 C <- list()
 Xs <- list()
 ys <- list()
+N <- 500
 for (dat in dats) {
-    load(paste(dat,'.RData',sep=''))
+    #load(paste(dat,'.RData',sep=''))
+    Xy <- as.matrix(read.csv(paste('./data/',dat,'_500.csv',sep='')))
+    X <- Xy[,1:7]
+    y <- Xy[,8]
+    X <- X[1:N,]
+    y <- y[1:N]
     print(y[1:10])
 
     yscale <- (y-mean(y)) / sd(y)
@@ -21,4 +27,4 @@ for (dat in dats) {
 }
 
 
-save(C, Cs, Xs, ys, file = 'C.RData')
+save(C, Cs, Xs, ys, file = './data/C.RData')

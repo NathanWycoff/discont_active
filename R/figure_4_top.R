@@ -1,7 +1,7 @@
 library(hetGP)
 library(akima)
 
-source("flee/flee_common.R")
+source("R/flee_common.R")
 
 plot_asm <- function(X, y, ed, main = '', xlab = '', ylab = '', fname = 'asm.pdf', useranks = TRUE) {
     Z <- X %*% ed$vectors[,1:2]

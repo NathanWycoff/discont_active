@@ -1,5 +1,5 @@
 
-source("flee/flee_common.R")
+source("R/flee_common.R")
 
 load('flee_bakeoff.RData')
 
