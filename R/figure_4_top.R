@@ -1,10 +1,7 @@
 library(hetGP)
 library(akima)
 
-source("flee_common.R")
-
-dats <- c('ssudan' , 'mali' , 'syria' , 'ethiopia' , 'burundi', 'car')
-pretty_names <- list(car = 'Central African Republic', ssudan='South Sudan', mali='Mali', syria='Syria', ethiopia='Ethiopia', burundi = 'Burundi')
+source("flee/flee_common.R")
 
 plot_asm <- function(X, y, ed, main = '', xlab = '', ylab = '', fname = 'asm.pdf', useranks = TRUE) {
     Z <- X %*% ed$vectors[,1:2]
@@ -16,7 +13,8 @@ plot_asm <- function(X, y, ed, main = '', xlab = '', ylab = '', fname = 'asm.pdf
     fld <- interp(x = Z[,1], y = Z[,2], z = smooth_y)
 
     #pal = colorRampPalette(c("red", "blue"))
-    pal = colorRampPalette(c("red", "cadetblue1"))
+    #pal = colorRampPalette(c("red", "cadetblue1"))
+    pal = colorRampPalette(c("cadetblue1","red"))
     #palpoint = colorRampPalette(c("orangered", "cyan"))
     palpoint <- pal
     KK <- 10
@@ -33,6 +31,12 @@ plot_asm <- function(X, y, ed, main = '', xlab = '', ylab = '', fname = 'asm.pdf
     # Plot results
     #pdf("cholera_unif_asm.pdf", width = 5, height = 5)
     pdf(fname)
+    #par(mar=c(5,4,4,2)+0.1) #BLTR
+    #par(mgp=c(3,1,0))
+    #par(mar=c(2.8,2.7,2,1)+0.1) #BLTR
+    #par(mar=c(1.7,1.7,2,1)+0.1) #BLTR
+    par(mar=c(1.7,2.1,2,2)+0.1) #BLTR
+    par(mgp=c(0.4,0.5,0))
     filled.contour(x = fld$x,
                    y = fld$y,
                    z = fld$z,
@@ -64,8 +68,9 @@ ev2s <- list(
             'car' = 'Max Move Speed'
              )
 
-load('C.RData')
+load('flee/C.RData')
 
+#for (dat in c('ssudan')) {
 for (dat in dats) {
     X <- Xs[[dat]]
     y <- ys[[dat]]
@@ -77,5 +82,5 @@ for (dat in dats) {
         yb[which(y==max(y))] <- -Inf
         y[maxind] <- yb[which.max(yb)]
     }
-    plot_asm(X, y, C[[dat]], main = pretty_names[[dat]], xlab = ev1s[[dat]], ylab = ev2s[[dat]], fname = paste(dat, '.pdf', sep = ''), useranks = F)
+    plot_asm(X, y, C[[dat]], main = pretty_names[[dat]], xlab = ev1s[[dat]], ylab = ev2s[[dat]], fname = paste('images/',dat, '.pdf', sep = ''), useranks = F)
 }

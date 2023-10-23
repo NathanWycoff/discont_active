@@ -1,20 +1,13 @@
 library(activegp)
 library(hetGP)
 
+func <- commandArgs(trailingOnly=TRUE)[1]
+
 tt <- Sys.time()
 
-source("R/common.R")
+source("R/toy_common.R")
+source("R/ackley.R")
 
-reps <- 5
-
-
-if (func=='quad') {
-    f <- function(x) sum(a*(x-0.5))^2
-} else if (func=='half_step') {
-    f <- function(x) sum(a*(x-0.5))>0
-} else {
-    stop("Unknown Function")
-}
 
 # Build results storage
 res <- list()
@@ -43,7 +36,7 @@ for (pi in 1:nP) {
 
             for (covtype in covtypes) {
                 fit <- hetGP::mleHomGP(X, y, covtype = covtype)
-                C_hat <- C_GP(fit)
+                C_hat <- C_GP(fit, verbose = FALSE)
                 a_hat <- eigen(C_hat)$vectors[,1]
                 err <- subspace_dist(a, a_hat)
                 res[[P]][[covtype]][rep,ni] <- err
